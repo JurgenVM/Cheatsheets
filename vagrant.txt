@@ -1,0 +1,4 @@
+
+==Box aanmaken==
+vagrant init mat/centos7
+vagrant box add
