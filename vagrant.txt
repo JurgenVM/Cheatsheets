@@ -2,3 +2,8 @@
 ==Box aanmaken==
 vagrant init mat/centos7
 vagrant box add
+vagrant status
+
+
+==Vagrant File==
+vb.name = ''
