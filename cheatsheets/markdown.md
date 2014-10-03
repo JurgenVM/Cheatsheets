@@ -3,24 +3,18 @@
 ----------
 
 
-`_text_` 		-> _text_
- 
+`_text_` 		-> _text_<br />
 `**text**` 	-> **text**
 
 
 ----------
 
 
-`# Header one #` -> # Header one #
-
-`## Header two ##` -> ## Header two ##
-
-`### Header three ###` -> ### Header three ###
-
-`#### Header four ####` -> #### Header four ####
-
-`##### Header five #####` -> ##### Header five #####
-
+`# Header one #` -> # Header one #<br />
+`## Header two ##` -> ## Header two ##<br />
+`### Header three ###` -> ### Header three ###<br />
+`#### Header four ####` -> #### Header four ####<br />
+`##### Header five #####` -> ##### Header five #####<br />
 `###### Header six ######` -> ###### Header six ######
 
 ----------
