@@ -15,4 +15,5 @@ Templates
 Interesting Read's & Tools
 ===========
 
+- [Add SSH key to BitBucket] (https://confluence.atlassian.com/display/BITBUCKET/Set+up+SSH+for+Git)
 
