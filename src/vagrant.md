@@ -7,7 +7,7 @@
 | `vagrant halt` 		| sluit de virtuele machine af		|
 | `vagrant reload` 		| herstart de virtuele machine		|
 | `vagrant destroy` 	| verwijderd de virtuele machine	|
-| `vagrant provision` 	|									|
+| `vagrant provision` 	| om alleen de scripts te testen	|
 | `vagrant status` 		| toont de status					|
 | `vagrant ssh`			| maakt een ssh verbinding			|
 

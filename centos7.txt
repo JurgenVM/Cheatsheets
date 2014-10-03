@@ -1,3 +1,0 @@
-==Cent OS 7==
-
-ip a (ip address opvragen)
