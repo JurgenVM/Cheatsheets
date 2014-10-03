@@ -49,12 +49,12 @@
 
 ----------
 
-| Table Header	| Table Header 	|	
-| :---			| :---			|
-| data			| data			|
-| data			| data			|
+| Head	| Head 	|	
+| :---	| :---	|
+| data	| data	|
+| data	| data	|
 
-`| Table Header	| Table Header 	|`..
-`| :---			| :---			|`..
-`| data			| data			|`..
-`| data			| data			|`..
+`| Head	| Head 	|`<br />
+`| :---			| :---			|`<br />
+`| data			| data			|`<br />
+`| data			| data			|`<br />
