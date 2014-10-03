@@ -9,13 +9,12 @@
 
 ----------
 
-
-`# Header one #` -> # Header one #<br />
-`## Header two ##` -> ## Header two ##<br />
-`### Header three ###` -> ### Header three ###<br />
-`#### Header four ####` -> #### Header four ####<br />
-`##### Header five #####` -> ##### Header five #####<br />
-`###### Header six ######` -> ###### Header six ######
+`# Header one `			<br />
+`## Header two `		<br />
+`### Header three `		<br />
+`#### Header four `		<br />
+`##### Header five `	<br />
+`###### Header six `
 
 ----------
 
