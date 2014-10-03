@@ -54,7 +54,7 @@
 | data			| data			|
 | data			| data			|
 
-`| Table Header	| Table Header 	|`
-`| :---			| :---			|`
-`| data			| data			|`
-`| data			| data			|`
+`| Table Header	| Table Header 	|`..
+`| :---			| :---			|`..
+`| data			| data			|`..
+`| data			| data			|`..
