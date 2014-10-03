@@ -2,13 +2,13 @@
 
 ## Usefull info ##
 
-| Command							| Task                           	|
-| :---                  			| :---                              |
-| show running-config				| |
-| show access-lists					| |
-| show mac-address-table			| |
-| show port-security <interface>	| |
-| clear mac-address-table			| |
+| Command							|
+| :---                  			|
+| show running-config				|
+| show access-lists					|
+| show mac-address-table			|
+| show port-security <interface>	|
+| clear mac-address-table			|
 
 ## Create ACL ##
 
