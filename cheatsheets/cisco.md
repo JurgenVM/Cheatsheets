@@ -1,31 +1,28 @@
-# Cisco IOS Cheatsheet #
+# Cisco IOS Commandos #
 
-## Usefull commands ##
+## Usefull info ##
 
-- show
-	-- `running-config`
-	-- `access-list`
-	-- `mac-address-table`
-	-- `port-security <interface>`
-
-- clear
-	-- `mac-address-table`
+| Command							| Task                           	|
+| :---                  			| :---                              |
+| show running-config				| |
+| show access-lists					| |
+| show mac-address-table			| |
+| show port-security <interface>	| |
+| clear mac-address-table			| |
 
 ## Create ACL ##
 
-1. config terminal
+*config terminal
+ip access-list extended <naam>
 
-1.1 ip access-list
-1.1.1 extended <naam>
-1.1.2 standard <naam>
-2. remark <commentaar>
-3. permit tcp host A.B.C.D host A.B.C.D eq www
-4. deny ip any any
+remark <commentaar>
+permit tcp host A.B.C.D host A.B.C.D eq www
+deny ip any any
 
-## Configure interface ##
 
-1. config terminal
+=== Configure interface ===
 
+config terminal
 interface <naam>
 ip address A.B.C.D A.B.C.D
 switchport mode trunk
