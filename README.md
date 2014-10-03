@@ -1,13 +1,13 @@
 Cheatsheets
 ===========
-- [Git](https://github.com/Ciberth/Cheatsheets-checklists/blob/master/cheatsheets/git.md)
-- [Vagrant](https://github.com/Ciberth/Cheatsheets-checklists/blob/master/cheatsheets/vagrant.md)
+- [Cisco](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/cisco.md)
+- [Vagrant](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/vagrant.md)
 
 
 Checklist
 ===========
-- [Opdracht 0](https://github.com/Ciberth/Cheatsheets-checklists/blob/master/opdrachten/opdracht0.md)
-- [Opdracht 1](https://github.com/Ciberth/Cheatsheets-checklists/blob/master/opdrachten/opdracht1.md)
+- [Opdracht 0](https://github.com/JurgenVM/Cheatsheets/blob/master/checklist/opdracht0.md)
+- [Opdracht 1](https://github.com/JurgenVM/Cheatsheets/blob/master/checklist/opdracht1.md)
 
 Templates
 ===========
