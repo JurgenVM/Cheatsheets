@@ -1,14 +1,32 @@
 # Cisco IOS Commandos #
 
-## Usefull info ##
+## Get info from router ##
 
-| Command							|
-| :---                  			|
-| show running-config				|
-| show access-lists					|
-| show mac-address-table			|
-| show port-security <interface>	|
+| Command							| Meaning 							|
+| :---                  			| :---								|
+| show running-config				| Shows the current configuration that runs on the device |
+| show access-lists					| Shows all the access-lists configured on the device
+| show mac-address-table			| Shows the table with al the known MAC addresses
+| show port-security <interface>	| 
+| show verion						| Get the inventory list of the device |
+| show ip route						|
+| show cdp neighbors detail			| Get info from connected devices |
+| show vlan							|
+| show vtp							|
+| show spanning-tree				|
+| show controllers					|
+| show flash						| Show flashable files to upgrade the OS |
+| show file systems					| Output the IOS files or images	|
 | clear mac-address-table			|
+
+## Usefull commands
+
+| Command							| Meaning 					|
+| :---                  			| :--- 						|
+| clear mac-address-table			| Clears the MAC address table	|
+| enable							| Go to EXEC mode			|
+| copy flash tftp					| Copy current flash to a tftp server	|
+| copy tftp flash					| Upgrade flash from tftp server		|
 
 ## Create ACL ##
 
