@@ -1,34 +1,71 @@
-# Cisco IOS Commandos #
+# Router
 
-## Get info from router ##
+## Get info from router
 
-| Command							| Meaning 							|
-| :---                  			| :---								|
-| show running-config				| Shows the current configuration that runs on the device |
-| show access-lists					| Shows all the access-lists configured on the device
-| show mac-address-table			| Shows the table with al the known MAC addresses
-| show port-security <interface>	| 
-| show verion						| Get the inventory list of the device |
-| show ip route						|
-| show cdp neighbors detail			| Get info from connected devices |
-| show vlan							|
-| show vtp							|
-| show spanning-tree				|
-| show controllers					|
-| show flash						| Show flashable files to upgrade the OS |
-| show file systems					| Output the IOS files or images	|
-| clear mac-address-table			|
+| Command							| Meaning
+| :---                  			| :---
+| `show running-config`				| Shows the current configuration that runs on the device 
+| `show access-lists`				| Shows all the access-lists configured on the device
+| `show mac-address-table`			| Shows the table with al the known MAC addresses
+| `show port-security <interface>`	| Get information about the port-security on specific port
+| `show verion`						| Get the inventory list of the device 
+| `show ip route`					| Shows all the routes
+| `show cdp neighbors detail`		| Get info from connected devices
+| `show vlan`						| Get all the VLAN's on the router
+| `show vtp`						|
+| `show spanning-tree`				|
+| `show controllers`				|
+| `show flash`						| Show flashable files to upgrade the OS 
+| `show file systems`				| Output the IOS files or images
 
 ## Usefull commands
 
-| Command							| Meaning 					|
-| :---                  			| :--- 						|
-| clear mac-address-table			| Clears the MAC address table	|
-| enable							| Go to EXEC mode			|
-| copy flash tftp					| Copy current flash to a tftp server	|
-| copy tftp flash					| Upgrade flash from tftp server		|
+| Command							| Meaning
+| :---                  			| :---
+| `enable`							| Go to EXEC mode
+| `configure terminal`				| Go to config mode
+| `hostname <name>`					| Change the hostname of the device
+| `clear mac-address-table`			| Clears the MAC address table
+| `copy flash tftp`					| Copy current flash to a tftp server
+| `copy tftp flash`					| Upgrade flash from tftp server
 
-## Create ACL ##
+## Configure interface 
+
+| Command							| Options				| Meaning
+| :---                  			| :---					| :---
+| `interface <name>`				|						| Select the interface
+| `ip address <ip> <subnetmask>`	|						| Configure the ip address / subnetmask
+
+# Configure telnet access
+
+Config mode `conf t`
+
+| Command				| Meaning
+| :---              	| :---
+| 1. `line vty 0 4`		|
+| 2. `password <pw>`	| Set the password
+| 3. `login`			| Enable the password on login
+
+# Switch
+
+## Configure Interface
+
+Config mode `conf t`
+Interface mode `interface <name>`
+
+| Command							| Options				| Meaning
+| :---                  			| :---					| :---
+| `switchport mode`					| `trunk`				| Configure port as trunk port
+| 									| `access vlan <nr>`	| Change port to specific vlan
+|									| `access`				| Change port to access mode
+| `switchport port-security`		| `violation shutdown`	| If violation occurs the port is shutdown
+|									| `mac-address sticky`	| The mac addresses are learned when new one gets plugged in
+| `ip access-group <nr>`			| `in`					|
+|									| `out`					|
+
+
+
+## Create ACL
 
 *config terminal
 ip access-list extended <naam>
@@ -36,25 +73,6 @@ ip access-list extended <naam>
 remark <commentaar>
 permit tcp host A.B.C.D host A.B.C.D eq www
 deny ip any any
-
-
-=== Configure interface ===
-
-config terminal
-interface <naam>
-ip address A.B.C.D A.B.C.D
-switchport mode trunk
-switchport access vlan <nr>
-
-	=== Configure Port Security ===
-	switchport mode access
-	switchport port-security
-	switchport port-security violation shutdown
-	switchport port-security mac-address sticky
-	
-	=== Configure ACL ===
-
-	ip access-group <nr> in/out
 
 === EIGRP ===
 
@@ -68,10 +86,5 @@ config terminal
 vlan <nr>
 
 === Configure Telnet Router ===
-
-config terminal
-line vty 0 4
-password telnet
-login
 
 
