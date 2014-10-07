@@ -2,21 +2,21 @@
 
 ## Get info from router
 
-  | Command							| Meaning
-  | :---                  			| :---
-  | `show running-config`				| Shows the current configuration that runs on the device 
-  | `show access-lists`				| Shows all the access-lists configured on the device
-  | `show mac-address-table`			| Shows the table with al the known MAC addresses
-  | `show port-security <interface>`	| Get information about the port-security on specific port
-  | `show verion`						| Get the inventory list of the device 
-  | `show ip route`					| Shows all the routes
-  | `show cdp neighbors detail`		| Get info from connected devices
-  | `show vlan`						| Get all the VLAN's on the router
-  | `show vtp`						|
-  | `show spanning-tree`				|
-  | `show controllers`				|
-  | `show flash`						| Show flashable files to upgrade the OS 
-  | `show file systems`				| Output the IOS files or images
+| Command							| Meaning
+| :---                  			| :---
+| `show running-config`				| Shows the current configuration that runs on the device 
+| `show access-lists`				| Shows all the access-lists configured on the device
+| `show mac-address-table`			| Shows the table with al the known MAC addresses
+| `show port-security <interface>`	| Get information about the port-security on specific port
+| `show verion`						| Get the inventory list of the device 
+| `show ip route`					| Shows all the routes
+| `show cdp neighbors detail`		| Get info from connected devices
+| `show vlan`						| Get all the VLAN's on the router
+| `show vtp`						|
+| `show spanning-tree`				|
+| `show controllers`				|
+| `show flash`						| Show flashable files to upgrade the OS 
+| `show file systems`				| Output the IOS files or images
 
 ## Usefull commands
 
