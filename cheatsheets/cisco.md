@@ -28,6 +28,7 @@
 | `clear mac-address-table`			| Clears the MAC address table
 | `copy flash tftp`					| Copy current flash to a tftp server
 | `copy tftp flash`					| Upgrade flash from tftp server
+| `remark <comment>`				| Add comment to the next command, when you do `show running-config` you can see all your remarks
 
 ## Configure interface 
 
@@ -46,11 +47,20 @@ Config mode `conf t`
 | 2. `password <pw>`	| Set the password
 | 3. `login`			| Enable the password on login
 
+## EIGRP
+
+Config mode `conf t`
+
+| Command					| Meaning
+| :---              		| :---
+| router eigrp <nr>			|
+| network A.B.C.D <netmask>	|
+
 # Switch
 
 ## Configure Interface
 
-Config mode `conf t`
+Config mode `conf t`<br>
 Interface mode `interface <name>`
 
 | Command							| Options				| Meaning
@@ -67,18 +77,15 @@ Interface mode `interface <name>`
 
 ## Create ACL
 
-*config terminal
-ip access-list extended <naam>
+Config mode `conf t`<br>
 
-remark <commentaar>
-permit tcp host A.B.C.D host A.B.C.D eq www
-deny ip any any
+| Command										| Options				| Meaning
+| :---                  						| :---					| :---
+| `ip access-list`								| `standard <name>`		|
+|												| `extended <name>`		|
+| `permit tcp host A.B.C.D host A.B.C.D eq www` | Permit traffic on port 80
+| `deny ip any any`								| Block all trafic
 
-=== EIGRP ===
-
-config terminal
-router eigrp <nr>
-network A.B.C.D A.B.C.D
 
 === VLAN ===
 
