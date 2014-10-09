@@ -3,6 +3,7 @@
 - [Markdown](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/markdown.md)
 - [Cisco](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/cisco.md)
 - [Vagrant](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/vagrant.md)
+- [CentOS 7](https://github.com/JurgenVM/Cheatsheets/blob/master/cheatsheets/centos7.md)
 
 
 # Checklist
