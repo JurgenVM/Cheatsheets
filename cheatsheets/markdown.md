@@ -42,7 +42,7 @@
 
 ----------
 
-| Head	| Head 	|	
+| Head	| Head 	|
 | :---	| :---	|
 | data	| data	|
 | data	| data	|
