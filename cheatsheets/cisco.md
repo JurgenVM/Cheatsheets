@@ -87,11 +87,14 @@ Config mode `conf t`<br>
 | `deny ip any any`								| Block all trafic
 
 
-=== VLAN ===
+## Create VLAN
 
-config terminal
-vlan <nr>
+Config mode `conf t`<br>
 
-=== Configure Telnet Router ===
+| Command					| Meaning
+| :---              		| :---
+| vlan <nr>					|
+
+
 
 

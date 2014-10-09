@@ -1,19 +1,20 @@
 
 ## Vagrant Commandos
 
-| Task 					| Command                           |
-| :---                  | :---                              |
-| `vagrant up` 			| start de virtuele machine			|
-| `vagrant halt` 		| sluit de virtuele machine af		|
-| `vagrant reload` 		| herstart de virtuele machine		|
-| `vagrant destroy` 	| verwijderd de virtuele machine	|
-| `vagrant provision` 	| om alleen de scripts te testen	|
-| `vagrant status` 		| toont de status					|
-| `vagrant ssh`			| maakt een ssh verbinding			|
+| Task 					| Command
+| :---                  | :---
+| `vagrant up` 			| boots the machine
+| `vagrant halt` 		| shutdowns the machine
+| `vagrant reload` 		| reboots the machine
+| `vagrant destroy` 	| destroys the machine
+| `vagrant provision` 	| run the configured scripts on the machine
+| `vagrant status` 		| Shows the status of all the machines in the current folder with the status
+| `vagrant ssh`			| creates an ssh connection
+| `vagrant rdp`			| creates remote desktop connection with a Windows machine
 
 
 ##Vagrant File
 
-| Task 					| Command                           |
-| :---                  | :---                              |
-| `vb.name = ''`		| naam van vm in virtualbox			|
+| Task 					| Command
+| :---                  | :---
+| `vb.name = ''`		| set the name of the machine in eq "Virtualbox"
