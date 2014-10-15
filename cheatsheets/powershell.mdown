@@ -1,21 +1,44 @@
 
-cd\ | go to root
+
+# Basic commands
+| cls & Clear-Host			|
+| cd						|
+| cd\ 						| go to root
+| dir & ls & Get-Childitem 	|
+| cat & Get-Content			|
+| Copy & cp & Copy-Item		|
+
+
 
 
 # Help system
 
-| Update-Help -Force				| Update the help
-| Save-Help							|
-| man								| Scrollable
-| help								|							
-| Get-Help "*keyword*" 				| Get help
-| Get-Help Get-* 					| Get all commands which start with "Get-"
-| Get-Help							| `-ShowWindow`
-| 									| `-Detailed`
-|									| `-Examples`
-| 									| `-Full`
-| 									| `-Online`
-| Get-Help -Category Provider		|
-| Get-verb							| Get the verbs used in PowerShell
-| Get-Alias -Definition get-process | Get all aliases for `Get-Process`
-| Get-Help about_*					| Get all the about topics
+| `Update-Help -Force`					| Update the help
+| `Save-Help`							|
+| `man`									| Scrollable
+| `help`								|							
+| `Get-Help "*keyword*"` 				| Get help
+| `Get-Help Get-*` 						| Get all commands which start with "Get-"
+| `Get-Help`							| `-ShowWindow`
+| 										| `-Detailed`
+|										| `-Examples`
+| 										| `-Full`
+| 										| `-Online`
+| 										| `-ShowCommand`
+| `Get-Help -Category Provider`			|
+| `Get-verb`							| Get the verbs used in PowerShell
+| `Get-Alias -Definition get-process` 	| Get all aliases for `Get-Process`
+| `Get-Help About_*`					| Get all the about topics
+| `Get-Process | Get-Member`			|
+
+# Export
+
+| `Export-csv`
+| `Export-Clixml`
+| `Out-File`
+| `Out-Printer`
+| `Out-GridView`
+| `Out-File`
+
+| `ConvertTo-Csv`
+| `ConvertTo-Html`
