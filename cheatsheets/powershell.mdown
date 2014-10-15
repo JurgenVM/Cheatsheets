@@ -1,0 +1,21 @@
+
+cd\ | go to root
+
+
+# Help system
+
+| Update-Help -Force				| Update the help
+| Save-Help							|
+| man								| Scrollable
+| help								|							
+| Get-Help "*keyword*" 				| Get help
+| Get-Help Get-* 					| Get all commands which start with "Get-"
+| Get-Help							| `-ShowWindow`
+| 									| `-Detailed`
+|									| `-Examples`
+| 									| `-Full`
+| 									| `-Online`
+| Get-Help -Category Provider		|
+| Get-verb							| Get the verbs used in PowerShell
+| Get-Alias -Definition get-process | Get all aliases for `Get-Process`
+| Get-Help about_*					| Get all the about topics
