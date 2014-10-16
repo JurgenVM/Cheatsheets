@@ -1,22 +1,25 @@
 
 
 # Basic commands
-| cls & Clear-Host			|
-| cd						|
-| cd\ 						| go to root
-| dir & ls & Get-Childitem 	|
-| cat & Get-Content			|
-| Copy & cp & Copy-Item		|
+| Command							| Meaning
+| :---								| :---
+| `cls` & `Clear-Host`				| clear the screen
+| `cd`								| change directory
+| `cd\` 							| go to root directory
+| `dir` & `ls` & `Get-Childitem` 	| shows whats in the directory
+| `cat` & `Get-Content`				| output the file
+| `Copy` & `cp` & `Copy-Item`		| copy the file
 
 
 
 
 # Help system
-
+| Command								| Meaning
+| :---									| :---
 | `Update-Help -Force`					| Update the help
-| `Save-Help`							|
+| `Save-Help`							| Save the help to a local file
 | `man`									| Scrollable
-| `help`								|							
+| `help`								| Alias
 | `Get-Help "*keyword*"` 				| Get help
 | `Get-Help Get-*` 						| Get all commands which start with "Get-"
 | `Get-Help`							| `-ShowWindow`
@@ -29,16 +32,18 @@
 | `Get-verb`							| Get the verbs used in PowerShell
 | `Get-Alias -Definition get-process` 	| Get all aliases for `Get-Process`
 | `Get-Help About_*`					| Get all the about topics
-| `Get-Process | Get-Member`			|
+| `Get-Process | Get-Member`			| Get all the methods, properties,... of the object
 
 # Export
 
-| `Export-csv`
-| `Export-Clixml`
-| `Out-File`
-| `Out-Printer`
-| `Out-GridView`
-| `Out-File`
-
-| `ConvertTo-Csv`
-| `ConvertTo-Html`
+| Command			| Meaning
+| :---				| :---
+| `Export-csv`		|
+| `Export-Clixml`	|
+| `Out-File`		|
+| `Out-Printer`		|
+| `Out-GridView`	|
+| `Out-File`		|
+|					|
+| `ConvertTo-Csv`	|
+| `ConvertTo-Html`	|
