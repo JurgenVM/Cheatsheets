@@ -61,6 +61,9 @@
 **Example: command does not accept pipeline input `Get-WmiObject`<br />**
 
 `Get-WmiObject -class win32_bios -ComputerName (Get-ADComputer -Filter *).Name`
+
+__Or__
+
 `Get-ADComputer -Filter * | Get-WmiObject win32_bios -Computername {$_.Name}`
 
 # Create new property
