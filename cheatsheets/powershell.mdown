@@ -55,7 +55,7 @@ Example: you want to check if a service is running on all the computers in the A
 |																										| `-ComputerName` supports `ByPropertyName`
 | `Get-ADComputer -Filter *`																			| Check for propertyname
 |																										| `-Name` gives you the name of the computer
-| `Get-ADComputer -Filter * -Name | Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}} 	| Get-Service -Name bits`
+<td colspan = "2"> `Get-ADComputer -Filter * -Name | Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}} 	| Get-Service -Name bits`</td>
 
 # Create new property
 
