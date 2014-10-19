@@ -1,5 +1,3 @@
-
-
 # Basic commands
 | Command							| Meaning
 | :---								| :---
@@ -9,9 +7,6 @@
 | `dir` & `ls` & `Get-Childitem` 	| shows whats in the directory
 | `cat` & `Get-Content`				| output the file
 | `Copy` & `cp` & `Copy-Item`		| copy the file
-
-
-
 
 # Help system
 | Command								| Meaning
@@ -47,3 +42,22 @@
 |					|
 | `ConvertTo-Csv`	|
 | `ConvertTo-Html`	|
+
+# Pipeline
+
+Example: you want to check if a service is running on all the computers in the AD <br />
+
+| Command																								| Meaning
+| :---																									| :---
+| `Get-ADComputer -Filter * 	| gm`																	| Check what object you are working with (in this case `ADComputer`)
+| `Get-Help Get-Service -ShowWindow`																	|
+| 																										| Search for `-InputObject` and see what it accepts (in this case `ServiceController` != `ADComputer`)
+|																										| `-ComputerName` supports `ByPropertyName`
+| `Get-ADComputer -Filter *`																			| Check for propertyname
+|																										| `-Name` gives you the name of the computer
+| `Get-ADComputer -Filter * -Name | Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}} 	| Get-Service -Name bits`
+
+# Create new property
+
+| `Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}}`	| Creates a new property called `ComputerName` from the existing property `Name`
+
