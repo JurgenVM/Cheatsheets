@@ -7,6 +7,7 @@
 | `dir` & `ls` & `Get-Childitem` 	| shows whats in the directory
 | `cat` & `Get-Content`				| output the file
 | `Copy` & `cp` & `Copy-Item`		| copy the file
+| `Measure-command {Get-Process}`	| Shows you the execution time
 
 # Help system
 | Command								| Meaning
@@ -47,14 +48,14 @@
 
 **Example: you want to check if a service is running on all the computers in the AD <br />**
 
-| Command																								| Meaning
-| :---																									| :---
-| `Get-ADComputer -Filter * 	| gm`																	| Check what object you are working with (in this case `ADComputer`)
-| `Get-Help Get-Service -ShowWindow`																	|
-| 																										| Search for `-InputObject` and see what it accepts (in this case `ServiceController` != `ADComputer`)
-|																										| `-ComputerName` supports `ByPropertyName`
-| `Get-ADComputer -Filter *`																			| Check for propertyname
-|																										| `-Name` gives you the name of the computer
+| Command								| Meaning
+| :---									| :---
+| `Get-ADComputer -Filter * 	| gm`	| Check what object you are working with (in this case `ADComputer`)
+| `Get-Help Get-Service -ShowWindow`	|
+| 										| Search for `-InputObject` and see what it accepts (in this case `ServiceController` != `ADComputer`)
+|										| `-ComputerName` supports `ByPropertyName`
+| `Get-ADComputer -Filter *`			| Check for propertyname
+|										| `-Name` gives you the name of the computer
 
 `Get-ADComputer -Filter * -Name | Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}} 	| Get-Service -Name bits`<br />
 
@@ -79,4 +80,24 @@ _Or_
 | Command																| Meaning
 | :---																	| :---
 |`Invoke-Command -ComputerName dc {Restart-Computer}`					| Execute the command on specific computers
-| `icm dc {Restart-Computer}`
+| `icm dc {Restart-Computer}`											|
+
+# Execution Policy
+
+Set to Allsigned <br />
+
+# Powershell Remote Session
+
+| Command										| Meaning
+| :---											| :---
+| `Get-PSSession`								|
+| `$sessions = New PSSession -ComputerName dc`	|
+| `icm -Session $sessions`						|
+
+# Scripting
+
+| Command										| Meaning
+| :---											| :---
+| `CTRL + J`									| Help you build a script
+| `$variabele = 1`								| Makes a new variabele called `variabele` with value `1`
+| `param($ComputerName)							| Create new parameter
