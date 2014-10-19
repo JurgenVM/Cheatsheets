@@ -3,7 +3,7 @@
 ----------
 
 
-`_text_` 		-> _text_<br />
+`*text*` 		-> *text*<br />
 `**text**` 	-> **text**
 
 
