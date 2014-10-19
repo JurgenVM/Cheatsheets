@@ -58,11 +58,11 @@
 
 `Get-ADComputer -Filter * -Name | Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}} 	| Get-Service -Name bits`<br />
 
-**Example: command does not accept pipeline input `Get-WmiObject`<br />**
+**Example: command does not accept pipeline input (Get-WmiObject)<br />**
 
 `Get-WmiObject -class win32_bios -ComputerName (Get-ADComputer -Filter *).Name`
 
-__Or__
+_Or_
 
 `Get-ADComputer -Filter * | Get-WmiObject win32_bios -Computername {$_.Name}`
 
@@ -71,6 +71,12 @@ __Or__
 | Command																| Meaning
 | :---																	| :---
 | `Select -Property @{n(ame)='ComputerName';e(xpression)={$_.name}}`	| Creates a new property called `ComputerName` from the existing property `Name`
-| `Select -ExpandProperty name											| Return the property in a array
+| `Select -ExpandProperty name`											| Return the property in a array
 
 # WmiObject & CimInstance
+
+# Remoting
+| Command																| Meaning
+| :---																	| :---
+|`Invoke-Command -ComputerName dc {Restart-Computer}`					| Execute the command on specific computers
+| `icm dc {Restart-Computer}`
