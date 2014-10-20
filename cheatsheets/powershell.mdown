@@ -100,4 +100,8 @@ Set to Allsigned <br />
 | :---											| :---
 | `CTRL + J`									| Help you build a script
 | `$variabele = 1`								| Makes a new variabele called `variabele` with value `1`
-| `param($ComputerName)							| Create new parameter
+| `param($ComputerName)`							| Create new parameter
+| `[ValidateSet("a","b","c")][string]$x = "a"`		|
+| `"this is $var"`									| Resolves the value of $var
+| `'this is $var'`									| Does **not** resolve the value
+| `The value of ```$var is $var`						| the ``` prevents that the value is resolved  
