@@ -8,7 +8,7 @@
 | :---						| :---
 | `visudo`					| edit sudo configuration
 | `/etc/ssh/sshd_config`	| edit SSH configuration
-
+| `rpm -ql wordpress`		| Show all files installed by the package
 ## Firewall settings
 
 
