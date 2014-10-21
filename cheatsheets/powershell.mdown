@@ -1,3 +1,9 @@
+# Must have commands
+| Command							| Meaning
+| :---								| :---
+| `gsv | clip`						| Clips output of `gsv` to the clipboard
+
+
 # Basic commands
 | Command							| Meaning
 | :---								| :---
@@ -29,6 +35,7 @@
 | `Get-Alias -Definition get-process` 	| Get all aliases for `Get-Process`
 | `Get-Help About_*`					| Get all the about topics
 | `Get-Process | Get-Member`			| Get all the methods, properties,... of the object
+| `Get-Command -Module AD*`				| Get all commands from modules which start with AD
 
 # Export
 
@@ -80,19 +87,34 @@ _Or_
 | Command																| Meaning
 | :---																	| :---
 |`Invoke-Command -ComputerName dc {Restart-Computer}`					| Execute the command on specific computers
-| `icm dc {Restart-Computer}`											|
+| `icm dc {Restart-Computer}`											| Short version
 
 # Execution Policy
 
-Set to Allsigned <br />
+| Command			| Meaning
+| :---				| :---
+| `Restricted`		|
+| `Unrestricted`	| Run any script **(not recommended)**
+| `AllSigned`		|
+| `RemoteSigned`	| Only run scripts that are remote signed
+| `Bypass`			|
+| `Undefined`		|
 
 # Powershell Remote Session
 
 | Command										| Meaning
 | :---											| :---
-| `Get-PSSession`								|
-| `$sessions = New PSSession -ComputerName dc`	|
-| `icm -Session $sessions`						|
+| `Get-PSSession`								| Get open sessions
+| `$sessions = New PSSession -ComputerName dc`	| Open session
+| `icm -Session $sessions {...}`				| Execute command in script block to all sessions
+
+# Parallelism
+
+**Parallel:** <br /> 
+ `icm -Computername (Get-Content servers.txt) { ... }` <br />
+
+**Serial:** <br />
+ `foreach ($s in (Get-Content servers.txt) ) { icm -Computername $s { ... }}`
 
 # Scripting
 
@@ -106,3 +128,6 @@ Set to Allsigned <br />
 | `'this is $var'`											| `'` Does **not** resolve the value
 | `"The value of &#96;$var is $var"`						| the &#96; prevents that the value is resolved  
 | `@' '@`													| Multiline string, usefull for `New-Snippet`
+| `-ErrorAction`											|
+| `-ErrorVariabele`											|
+

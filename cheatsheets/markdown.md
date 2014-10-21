@@ -5,7 +5,7 @@
 
 `*text*` 		-> *text*<br />
 `**text**` 	-> **text**
-
+`<br />` 	-> new line
 
 ----------
 
