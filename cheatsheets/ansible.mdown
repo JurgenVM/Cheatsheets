@@ -2,12 +2,14 @@
 
 ## Install package
 
-- name: Install common packages
+`- name: Install common packages
   yum: pkg={{item}} state=installed
   with_items:
     - libselinux-python
-	
+`
 **OR**
 
-- name: install python-pycurl
-  yum: pkg=python-pycurl state=installed
+`
+- name: install python-pycurl<br />
+  yum: pkg=python-pycurl state=installed<br />
+`
