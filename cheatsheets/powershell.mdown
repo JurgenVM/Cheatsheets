@@ -126,7 +126,7 @@ _Or_
 | `[ValidateSet("a","b","c")][string]$x = "a"`				| Value of $x **must** be a value of the ValidateSet
 | `"this is $var"`											| `"` Resolves the value of $var
 | `'this is $var'`											| `'` Does **not** resolve the value
-| `"The value of &#96;$var is $var"`						| the &#96;(`&#96;`) prevents that the value is resolved  
+| `"The value of &#96;$var is $var"`						| the &#96; (`&#96;`) prevents that the value is resolved  
 | `@' '@`													| Multiline string, usefull for `New-Snippet`
 | `-ErrorAction`											|
 | `-ErrorVariabele`											|
