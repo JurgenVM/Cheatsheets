@@ -51,3 +51,9 @@
 `| :---			| :---			|`<br />
 `| data			| data			|`<br />
 `| data			| data			|`<br />
+
+-----------
+
+```
+You can create a code block using ``` <code> ```
+```
