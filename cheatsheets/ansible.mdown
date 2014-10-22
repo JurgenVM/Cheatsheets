@@ -1,0 +1,13 @@
+# Ansible
+
+## Install package
+
+- name: Install common packages
+  yum: pkg={{item}} state=installed
+  with_items:
+    - libselinux-python
+	
+**OR**
+
+- name: install python-pycurl
+  yum: pkg=python-pycurl state=installed
