@@ -1,12 +1,12 @@
 # Ansible
 
 ## Install package
-
-`- name: Install common packages
+<code>
+- name: Install common packages
   yum: pkg={{item}} state=installed
   with_items:
     - libselinux-python
-`
+</code>
 **OR**
 
 `
