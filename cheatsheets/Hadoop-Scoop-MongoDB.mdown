@@ -204,15 +204,163 @@ sqoop export --connect jdbc:mysql://localhost/hadooptest
 sqoop export --connect jdbc:mysql://localhost/hadooptest
 --username hadoopuser --password password --table employees
 --export-dir /user/hive/warehouse/employees
---input-fields-terminated-by ' \001'
---input-lines-terminated-by ' \n'
+--input-fields-terminated-by '\001'
+--input-lines-terminated-by '\n'
 ```
 
+#Mongo
 
+| Command						| Meaning
+| :---							| :---
+| `mongo`						| Load mongo shell
+| `show dbs`					| Show current databases
+| `use movies`					| Use the database `movies`
+| `db.getName()`				| Get name current database
+| `show collections`			| Show all tables
+| ``| 
 
+## Create / Add data in MongoDB
+- `db.comedy.insert({name:"Ted", year:2012})`
+- `db.comedy.save({name:"Ted", year:2012})`
+	- save does an insert if there is no `_id`key in the object, else it does an update
 
+## Find
+```
+db.comedy.find();
+	db.comedy.find({ "field" : { $gt: value } } ); // greater than : field > value
+	db.comedy.find({ "field" : { $lt: value } } ); // less than : field < value
+	db.comedy.find({ "field" : { $gte: value } } ); // greater than or equal to : field >= value
+	db.comedy.find({ "field" : { $lte: value } } ); // less than or equal to : field <= value
 
+db.comedy.find({ year: { $gt: 2007, $lt: 2011} } )
+db.comedy.find({ year: 2012})
 
+db.comedy.find({year:{$lt:2012}}, {name:true}) //only show name column
+db.comedy.find({year:{$lt:2012}}, {name:false}) //all columns except name
+
+db.comedy.find({year: {$ne: 2011}}) // $ne -> !=
+
+db.comedy.find({ year: {$in: [2010,2011,2012]}})
+db.comedy.find({ year: {$nin: [2008,2009]}}) // $nin = not in
+
+db.comedy.find({ $nor: [ { year: 2012 }, { name: 'The hangover' } ] } ) // all must be !=
+
+db.comedy.find({ $or: [{year: 2012}, {name: ' The hangover' }]})
+db.comedy.find({year: 2012, $or: [{name: ' Ted' }, {name: ' The hangover' }]})
+
+db.comedy.find({$and:[{year: {$gt: 2010}}, { year:{ $lt: 2012}}]} )
+db.comedy.find({year: { $gt: 2010, $lt: 2012} } )
+
+```
+
+### Find dot notation
+```
+db.articles.insert({title:'MongoDB in Mongolia', meta:{author:'Ghenghiz
+Khan', date:1321958598538, likes:75, tags:['mongo', 'mongolia',
+'ghenghiz']}, comments:[{by:'Alex', text:'Dude, it rocks'}, {by:'Steve',
+text:'The best article ever!'}]})
+```
+- article
+	- title
+	- meta
+		- author
+		- date
+		- likes
+		- tags (array)
+	- comments (array)
+		- by
+		- text
+```
+db.articles.find({'meta.author':'Chad Muska' } )
+db.articles.find({'meta.likes':{$gt:10}})
+db.articles.find({'meta.tags':'mongolia'})
+db.articles.find({'comments.by':'Steve'})
+```
+
+### $Size
+```
+db.articles.find( { comments : { $size: 2 } } ) // exact 2 comments
+db.articles.find( { tags : { $size: 2 } } ) // exact 2 tags
+```
+
+### Regular Expression
+```
+db.comedy.find({name:{$regex: /bill| ted/i}})
+db.comedy.find({name: /The hangover.*/i } );
+db.comedy.find({name: {$regex: 'The hangover.*', $options: 'i'}} );
+db. comedy.find({name: {$regex: /The hangover.*/i, $nin: [' The Hangover Part II']}} );
+```
+
+### $Not
+```
+db.comedy.find({name: {$not: /The hangover.*/i}} );
+```
+
+### Javascript expression
+```
+db.comedy.find('this.year > 2009 && this.name !== "Ted"')
+=
+db.comedy.find({year:{$gt: 2009}, name:{$ne:'Ted'}})
+
+db.comedy.find({ $where: 'this.year > 2011'}) // $where expression lets you use SQL
+db.comedy.find({name:'Ted', $where: 'this.year > 2010'})
+```
+
+### Count
+```
+db.comedy.count()
+db.comedy.count({year:{$gt:2009} } )
+```
+
+### skip() and find()
+```
+db.comedy.find().limit(2) //limit output to 2
+
+db.comedy.findOne()
+
+db.comedy.find().skip(1).limit(2)
+```
+
+### $all
+```
+db.articles.find ({ 'meta.tags' : {$all: ['mongodb', 'mongo']}});
+```
+
+### $exists
+```
+db.articles.find({title: {$exists : true} } );
+db.articles.find({titles: {$exists : true}});
+db.articles.find({titles: {$exists : false}});
+db.articles.find({ ' comments.by' : {$exists : true}});
+```
+
+### sort()
+```
+db. articles.find().sort( { title : -1 } ); // sort by title, descending order
+```
+
+##Update
+```
+db.comedy.update({name:"Ted"}, {$set:{director:'Seth MacFarlane', cast:['Mark Wahlberg', ' Mila Kunis']}})
+db.comedy.update({name:"Ted"}, {$push:{cast:'Joel McHale'}}) // add into array
+
+db.comedy.update({name:"Ted"}, {$pull:{cast:' Giovanni Ribisi '}}) //remove item in array
+```
+
+##Delete
+```
+db.comedy.update({name:'Ted'}, {$unset:{cast:1}})
+
+db.comedy.update({$unset:{cast:1}}, false, true)
+	false 	-> upsert option
+	true 	-> multiple option, so if you want to delete from the whole collection
+
+db.comedy.remove({name:' Ted'}) //delete all with name set to `Ted`
+
+db.comedy.remove() // empty the collection
+db.comedy.drop() // remove the collection
+db.dropDatabase() // drop current database
+```
 
 
 
