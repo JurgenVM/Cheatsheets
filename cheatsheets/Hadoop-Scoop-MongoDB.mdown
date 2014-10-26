@@ -49,28 +49,23 @@
 -------------------------------------------------------------------------------------
 
 # Hive
-
+| Command											| Meaning
+| :---												| :---
 | `hive`											| Load hive shell
 | `quit;`											| Exit shell
 | `hive -e "HiveQL query"`							| Execute query
 | `hive -e "select sighted from ufodata limit 5;"`	| Sample of 5 values sighted column
 | `hive -e "select reported from ufodata"`			| Validate the contents of column
 | `hive -f commands.hql`							| Execute file
-| ``	|
-| ``	|
 
 **Load data in the database from hadoop filesystem.**<br />
-<code>
-LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;
-</code>
+`LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;`
 
 **Set right column separator**<br />
-<code>
-CREATE TABLE ufodata(sighted string, reported string, sighting_location
+`CREATE TABLE ufodata(sighted string, reported string, sighting_location
 string, shape string, duration string, description string)
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '\t';
-</code>
+FIELDS TERMINATED BY '\t';`
 
 **Create table from existing file**<br />
 <code>
