@@ -1,5 +1,4 @@
-#Hadoop
-
+# Hadoop
 ## Steps to run JAR
 1. `chmod 777 <your jar>.jar`
 2. `hadoop fs -mkdir VoteCountInput`
@@ -40,14 +39,12 @@
 | `mapred-size.xml`						| MapReduces configuration
 
 ## Required JAR
-- `/usr/lib/hadoop/hadoop-common-2.0.0-cdh4.1.1.jar`
-- `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-client-core-2.0.0-cdh4.1.1.jar`
-- `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
-- `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
-- `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
-
+1. `/usr/lib/hadoop/hadoop-common-2.0.0-cdh4.1.1.jar`
+2. `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-client-core-2.0.0-cdh4.1.1.jar`
+3. `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
+4. `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
+5. `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
 -------------------------------------------------------------------------------------
-
 # Hive
 | Command											| Meaning
 | :---												| :---
@@ -58,10 +55,12 @@
 | `hive -e "select reported from ufodata"`			| Validate the contents of column
 | `hive -f commands.hql`							| Execute file
 
-**Load data in the database from hadoop filesystem.**<br />
-`LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;`
+**Load data in the database from hadoop filesystem.**
+```
+LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;
+```
 
-**Set right column separator**<br />
+**Set right column separator**
 ```
 CREATE TABLE ufodata(sighted string, reported string, sighting_location
 string, shape string, duration string, description string)
@@ -69,7 +68,7 @@ ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t';
 ```
 
-**Create table from existing file**<br />
+**Create table from existing file**
 ```
 CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
 ROW FORMAT DELIMITED
@@ -77,7 +76,7 @@ FIELDS TERMINATED BY '\t'
 LOCATION '/tmp/states';
 ```
 
-**Exporting query output**<br />
+**Exporting query output**
 ```
 INSERT OVERWRITE DIRECTORY '/tmp/out'
 SELECT t1.sighted, t1.reported, t1.shape, t2.full_name
@@ -88,7 +87,7 @@ ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sight
 	- `hadoop fs -ls /tmp/out`
 	- `hadoop fs -cat /tmp/out/000000_1 | head`
 
-**Making partitioned UFO sighting table**<br />
+**Making partitioned UFO sighting table**
 ```
 CREATE TABLE partufo(sighted string, reported string, sighting_location
 string,shape string, duration string, description string)
@@ -125,7 +124,7 @@ description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;
 | `SELECT COUNT(*) FROM table;`												| `SELECT COUNT(*) FROM table;`
 | `SELECT own, COUNT(*) FROM table GROUP BY own;`							| `SELECT own, COUNT(*) FROM table GROUP BY own;`
 | `SELECT MAX(col_name) AS label FROM table;`								| `SELECT MAX(col_name) AS label FROM table;`
-| `SELECT p.name, comment FROM p, e WHERE p.name = e.name;`					| `SELECT p.name, comment FROM p JOIN e ON (p.name = e.name)`
+| `SELECT p.na, comment FROM p, e WHERE p.na = e.na;`					| `SELECT p.name, comment FROM p JOIN e ON (p.na = e.na)`
 
 | MySQL							| HiveQL
 | :---							| :---
@@ -278,7 +277,7 @@ db.articles.find({'meta.tags':'mongolia'})
 db.articles.find({'comments.by':'Steve'})
 ```
 
-### $Size
+### Size
 ```
 db.articles.find( { comments : { $size: 2 } } ) // exact 2 comments
 db.articles.find( { tags : { $size: 2 } } ) // exact 2 tags
@@ -289,10 +288,10 @@ db.articles.find( { tags : { $size: 2 } } ) // exact 2 tags
 db.comedy.find({name:{$regex: /bill| ted/i}})
 db.comedy.find({name: /The hangover.*/i } );
 db.comedy.find({name: {$regex: 'The hangover.*', $options: 'i'}} );
-db. comedy.find({name: {$regex: /The hangover.*/i, $nin: [' The Hangover Part II']}} );
+db.comedy.find({name: {$regex: /The hangover.*/i, $nin: [' The Hangover Part II']}} );
 ```
 
-### $Not
+### Not
 ```
 db.comedy.find({name: {$not: /The hangover.*/i}} );
 ```
@@ -322,12 +321,12 @@ db.comedy.findOne()
 db.comedy.find().skip(1).limit(2)
 ```
 
-### $all
+### all
 ```
 db.articles.find ({ 'meta.tags' : {$all: ['mongodb', 'mongo']}});
 ```
 
-### $exists
+### exists
 ```
 db.articles.find({title: {$exists : true} } );
 db.articles.find({titles: {$exists : true}});
@@ -362,25 +361,3 @@ db.comedy.remove() // empty the collection
 db.comedy.drop() // remove the collection
 db.dropDatabase() // drop current database
 ```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
