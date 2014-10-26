@@ -50,6 +50,67 @@
 
 # Hive
 
+| `hive`											| Load hive shell
+| `quit;`											| Exit shell
+| `hive -e "HiveQL query"`							| Execute query
+| `hive -e "select sighted from ufodata limit 5;"`	| Sample of 5 values sighted column
+| `hive -e "select reported from ufodata"`			| Validate the contents of column
+| `hive -f commands.hql`							| Execute file
+| ``	|
+| ``	|
+
+**Load data in the database from hadoop filesystem.**<br />
+<code>
+LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;
+</code>
+
+**Set right column separator**<br />
+<code>
+CREATE TABLE ufodata(sighted string, reported string, sighting_location
+string, shape string, duration string, description string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t';
+</code>
+
+**Create table from existing file**<br />
+<code>
+CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t'
+LOCATION '/tmp/states';
+</code>
+
+**Exporting query output**<br />
+<code>
+INSERT OVERWRITE DIRECTORY '/tmp/out'
+SELECT t1.sighted, t1.reported, t1.shape, t2.full_name
+FROM ufodata t1 JOIN states t2
+ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sighting_location) -1))));
+</code>
+- Output will be in `/tmp/out`
+	- `hadoop fs -ls /tmp/out`
+	- `hadoop fs -cat /tmp/out/000000_1 | head`
+
+**Making partitioned UFO sighting table**<br />
+<code>
+CREATE TABLE partufo(sighted string, reported string, sighting_location
+string,shape string, duration string, description string)
+PARTITIONED BY (year string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t';
+</code>
+
+<code>
+SET hive.exec.dynamic.partition=true;
+SET hive.exec.dynamic.partition.mode=nonstrict;
+INSERT OVERWRITE TABLE partufo partition (year)
+SELECT sighted, reported, sighting_location, shape, duration,
+description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;
+</code>
+
+- Location of the partioned table
+	- `/user/hive/warehouse/partufo/`
+
 ## HiveQL vs SQL
 
 [Source](http://hortonworks.com/blog/hive-cheat-sheet-for-sql-users/)
@@ -74,6 +135,7 @@
 | `USE database;`				| `USE database;`
 | `SHOW DATABASES;`				| `SHOW DATABASES;`
 | `SHOW TABLES;`				| `SHOW TABLES;`
+| 								| `SHOW TABLES '.*data';`
 | `DESCRIBE table;`				| `DESCRIBE (FORMATTED|EXTENDED) table;`
 | `CREATE DATABASE db_name;`	| `CREATE DATABASE db_name;`
 | `DROP DATABASE db_name;`		| `DROP DATABASE db_name (CASCADE);`
