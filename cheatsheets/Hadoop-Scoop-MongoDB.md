@@ -18,6 +18,7 @@
 | `hadoop fs -cp votes.txt votes2.txt`	| Copy file
 | `hadoop fs -mv votes.txt newname.txt`	| Move file
 | `hadoop fs -rm newname.txt`			| Remove file
+| `hadoop fs -rm -r newname.txt`		| Remove recursive
 | `hadoop fs -mkdir myinput`			| Create folder
 | `hadoop fs -du votes.txt`				| Get size of file / folder
 | `hadoop fs -du -s /.`					| Get size of everything in the folder
