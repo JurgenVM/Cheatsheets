@@ -44,6 +44,7 @@
 3. `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
 4. `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
 5. `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
+
 -------------------------------------------------------------------------------------
 # Hive
 | Command											| Meaning
