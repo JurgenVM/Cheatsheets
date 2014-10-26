@@ -3,6 +3,11 @@
 ## Initial setup
 [New user / Configure SSH](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-centos-7)
 
+## Yum
+| Path						| Meaning
+| :---						| :---
+| `yum provides *bin/dig` 	|
+
 ## Configuration files
 | Path						| Meaning
 | :---						| :---
@@ -13,3 +18,10 @@
 
 
 ## Services
+
+## Transport layer
+
+| Path						| Meaning
+| :---						| :---
+| `sudo ss -tulpn`			|
+| `sudo ps -ef`				|
