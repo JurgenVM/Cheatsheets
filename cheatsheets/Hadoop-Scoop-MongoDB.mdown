@@ -52,15 +52,28 @@
 
 ## HiveQL vs SQL
 
-| `SELECT from_columns FROM table WHERE conditions;`											| `SELECT from_columns FROM table WHERE conditions;`
-| `SELECT * FROM table;`																		| `SELECT * FROM table;`
-| `SELECT * FROM table WHERE rec_name = "value";`												| `SELECT * FROM table WHERE rec_name = "value";`
-| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`								| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`
-| `SELECT column_name FROM table;`																| `SELECT column_name FROM table;`
-| `SELECT DISTINCT column_name FROM table;`														| `SELECT DISTINCT column_name FROM table;`
-| `SELECT col1, col2 FROM table ORDER BY col2;`													| `SELECT col1, col2 FROM table ORDER BY col2;`
-| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`											| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`
-| `SELECT COUNT(*) FROM table;`																	| `SELECT COUNT(*) FROM table;`
-| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`											| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`
-| `SELECT MAX(col_name) AS label FROM table;`													| `SELECT MAX(col_name) AS label FROM table;`
-| `SELECT pet.name, comment FROM pet, event WHERE pet.name = event.name;`						| `SELECT pet.name, comment FROM pet JOIN event ON (pet.name = event.name)`
+[Source](http://hortonworks.com/blog/hive-cheat-sheet-for-sql-users/)
+
+| MySQL																		| HiveQL
+| :---																		| :---
+| `SELECT from_columns FROM table WHERE conditions;`						| `SELECT from_columns FROM table WHERE conditions;`
+| `SELECT * FROM table;`													| `SELECT * FROM table;`
+| `SELECT * FROM table WHERE rec_name = "value";`							| `SELECT * FROM table WHERE rec_name = "value";`
+| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`			| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`
+| `SELECT column_name FROM table;`											| `SELECT column_name FROM table;`
+| `SELECT DISTINCT column_name FROM table;`									| `SELECT DISTINCT column_name FROM table;`
+| `SELECT col1, col2 FROM table ORDER BY col2;`								| `SELECT col1, col2 FROM table ORDER BY col2;`
+| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`						| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`
+| `SELECT COUNT(*) FROM table;`												| `SELECT COUNT(*) FROM table;`
+| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`						| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`
+| `SELECT MAX(col_name) AS label FROM table;`								| `SELECT MAX(col_name) AS label FROM table;`
+| `SELECT pet.name, comment FROM pet, event WHERE pet.name = event.name;`	| `SELECT pet.name, comment FROM pet JOIN event ON (pet.name = event.name)`
+
+| MySQL							| HiveQL
+| :---							| :---
+| `USE database;`				| `USE database;`
+| `SHOW DATABASES;`				| `SHOW DATABASES;`
+| `SHOW TABLES;`				| `SHOW TABLES;`
+| `DESCRIBE table;`				| `DESCRIBE (FORMATTED|EXTENDED) table;`
+| `CREATE DATABASE db_name;`	| `CREATE DATABASE db_name;`
+| `DROP DATABASE db_name;`		| `DROP DATABASE db_name (CASCADE);`
