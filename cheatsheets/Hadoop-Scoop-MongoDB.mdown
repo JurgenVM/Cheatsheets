@@ -30,7 +30,7 @@
 | `hdfs dfsadmin -report`				| Get dfs report
 
 ## Configuration files
-/home/training/src/hadoop-common-project/hadoop-common/src/test/resources/
+`/home/training/src/hadoop-common-project/hadoop-common/src/test/resources/`
 
 | Command								| Meaning
 | :---									| :---
@@ -45,9 +45,3 @@
 - `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
 - `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
 - `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
-
- 
-| ``|
-| ``|
-| ``|
-| ``|
