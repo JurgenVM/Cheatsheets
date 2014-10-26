@@ -58,16 +58,16 @@
 | :---																		| :---
 | `SELECT from_columns FROM table WHERE conditions;`						| `SELECT from_columns FROM table WHERE conditions;`
 | `SELECT * FROM table;`													| `SELECT * FROM table;`
-| `SELECT * FROM table WHERE rec_name = "value";`							| `SELECT * FROM table WHERE rec_name = "value";`
-| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`			| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`
+| `SELECT * FROM table WHERE rec_name = "v";`								| `SELECT * FROM table WHERE rec_name = "v";`
+| `SELECT * FROM TABLE WHERE r1 = "v1" AND r2 = "v2";`						| `SELECT * FROM TABLE WHERE r1 = "v1" AND r2 = "v2";`
 | `SELECT column_name FROM table;`											| `SELECT column_name FROM table;`
 | `SELECT DISTINCT column_name FROM table;`									| `SELECT DISTINCT column_name FROM table;`
-| `SELECT col1, col2 FROM table ORDER BY col2;`								| `SELECT col1, col2 FROM table ORDER BY col2;`
-| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`						| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`
+| `SELECT c1, c2 FROM table ORDER BY c2;`									| `SELECT c1, c2 FROM table ORDER BY c2;`
+| `SELECT c1, c2 FROM table ORDER BY c2 DESC;`								| `SELECT c1, c2 FROM table ORDER BY c2 DESC;`
 | `SELECT COUNT(*) FROM table;`												| `SELECT COUNT(*) FROM table;`
 | `SELECT owner, COUNT(*) FROM table GROUP BY owner;`						| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`
 | `SELECT MAX(col_name) AS label FROM table;`								| `SELECT MAX(col_name) AS label FROM table;`
-| `SELECT pet.name, comment FROM pet, event WHERE pet.name = event.name;`	| `SELECT pet.name, comment FROM pet JOIN event ON (pet.name = event.name)`
+| `SELECT p.name, comment FROM p, e WHERE p.name = e.name;`					| `SELECT p.name, comment FROM p JOIN e ON (p.name = e.name)`
 
 | MySQL							| HiveQL
 | :---							| :---
