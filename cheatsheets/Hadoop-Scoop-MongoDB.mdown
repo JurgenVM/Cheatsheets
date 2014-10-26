@@ -1,0 +1,53 @@
+#Hadoop
+
+## Steps to run JAR
+1. `chmod 777 <your jar>.jar`
+2. `hadoop fs -mkdir VoteCountInput`
+3. `hadoop fs -cp votes.txt VoteCountInput`
+4. `hadoop jar <your jar>.jar VoteCountInput VoteCountOutput`
+5. `hadoop fs -ls VoteCountOutput`
+6. `hadoop fs -cat VoteCountOutput/part-r-00000`
+
+## File commands
+| Command								| Meaning
+| :---									| :---
+| `hadoop fs -<Unix commands>`			| Main rule
+| `hadoop fs -ls` 						| Show content hadoop home folder
+| `hadoop fs put votes.txt` 			| Upload file to hadoop cluster (hfds)
+| `hadoop fs -tail votes.txt`			| Show last lines file
+| `hadoop fs -cat votes.txt`			| Show full content
+| `hadoop fs -cp votes.txt votes2.txt`	| Copy file
+| `hadoop fs -mv votes.txt newname.txt`	| Move file
+| `hadoop fs -rm newname.txt`			| Remove file
+| `hadoop fs -mkdir myinput`			| Create folder
+| `hadoop fs -du votes.txt`				| Get size of file / folder
+| `hadoop fs -du -s /.`					| Get size of everything in the folder
+
+## Admin stuff
+| Command								| Meaning
+| :---									| :---
+| `hdfs dfsadmin`						| Get all possible commands for `hdfs dfsadmin`
+| `hdfs dfsadmin -report`				| Get dfs report
+
+## Configuration files
+/home/training/src/hadoop-common-project/hadoop-common/src/test/resources/
+
+| Command								| Meaning
+| :---									| :---
+| `core-site.xml`						| Configuration file of the Hadoop system
+|										| `fs.s3.block.size` Storage block size
+| `hdfs-site.xml`						| HDFS specific configuration parameters
+| `mapred-size.xml`						| MapReduces configuration
+
+## Required JAR
+- `/usr/lib/hadoop/hadoop-common-2.0.0-cdh4.1.1.jar`
+- `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-client-core-2.0.0-cdh4.1.1.jar`
+- `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
+- `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
+- `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
+
+ 
+| ``|
+| ``|
+| ``|
+| ``|
