@@ -8,7 +8,7 @@
 5. `hadoop fs -ls VoteCountOutput`
 6. `hadoop fs -cat VoteCountOutput/part-r-00000`
 
-## File commands
+## File & Folder commands
 | Command								| Meaning
 | :---									| :---
 | `hadoop fs -<Unix commands>`			| Main rule
@@ -45,3 +45,22 @@
 - `/usr/lib/hadoop-mapreduce/hadoop-mapreduce-jobclient-2.0.0-cdh4.1.1.jar`
 - `/usr/lib/hadoop/lib/commons-cli-1.2.jar`
 - `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
+
+-------------------------------------------------------------------------------------
+
+# Hive
+
+## HiveQL vs SQL
+
+| `SELECT from_columns FROM table WHERE conditions;`											| `SELECT from_columns FROM table WHERE conditions;`
+| `SELECT * FROM table;`																		| `SELECT * FROM table;`
+| `SELECT * FROM table WHERE rec_name = "value";`												| `SELECT * FROM table WHERE rec_name = "value";`
+| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`								| `SELECT * FROM TABLE WHERE rec1 = "value1" AND rec2 = "value2";`
+| `SELECT column_name FROM table;`																| `SELECT column_name FROM table;`
+| `SELECT DISTINCT column_name FROM table;`														| `SELECT DISTINCT column_name FROM table;`
+| `SELECT col1, col2 FROM table ORDER BY col2;`													| `SELECT col1, col2 FROM table ORDER BY col2;`
+| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`											| `SELECT col1, col2 FROM table ORDER BY col2 DESC;`
+| `SELECT COUNT(*) FROM table;`																	| `SELECT COUNT(*) FROM table;`
+| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`											| `SELECT owner, COUNT(*) FROM table GROUP BY owner;`
+| `SELECT MAX(col_name) AS label FROM table;`													| `SELECT MAX(col_name) AS label FROM table;`
+| `SELECT pet.name, comment FROM pet, event WHERE pet.name = event.name;`						| `SELECT pet.name, comment FROM pet JOIN event ON (pet.name = event.name)`
