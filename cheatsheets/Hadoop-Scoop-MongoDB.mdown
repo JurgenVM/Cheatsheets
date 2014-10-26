@@ -216,8 +216,7 @@ sqoop export --connect jdbc:mysql://localhost/hadooptest
 | `show dbs`					| Show current databases
 | `use movies`					| Use the database `movies`
 | `db.getName()`				| Get name current database
-| `show collections`			| Show all tables
-| ``| 
+| `show collections`			| Show all tables 
 
 ## Create / Add data in MongoDB
 ```
