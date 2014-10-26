@@ -62,38 +62,38 @@
 `LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;`
 
 **Set right column separator**<br />
-`CREATE TABLE ufodata(sighted string, reported string, sighting_location
+```CREATE TABLE ufodata(sighted string, reported string, sighting_location
 string, shape string, duration string, description string)
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '\t';`
+FIELDS TERMINATED BY '\t';```
 
 **Create table from existing file**<br />
-`CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
+```CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
-LOCATION '/tmp/states';`
+LOCATION '/tmp/states';```
 
 **Exporting query output**<br />
-`INSERT OVERWRITE DIRECTORY '/tmp/out'
+```INSERT OVERWRITE DIRECTORY '/tmp/out'
 SELECT t1.sighted, t1.reported, t1.shape, t2.full_name
 FROM ufodata t1 JOIN states t2
-ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sighting_location) -1))));`
+ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sighting_location) -1))));```
 - Output will be in `/tmp/out`
 	- `hadoop fs -ls /tmp/out`
 	- `hadoop fs -cat /tmp/out/000000_1 | head`
 
 **Making partitioned UFO sighting table**<br />
-`CREATE TABLE partufo(sighted string, reported string, sighting_location
+```CREATE TABLE partufo(sighted string, reported string, sighting_location
 string,shape string, duration string, description string)
 PARTITIONED BY (year string)
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '\t';`
+FIELDS TERMINATED BY '\t';```
 
-`SET hive.exec.dynamic.partition=true;
+```SET hive.exec.dynamic.partition=true;
 SET hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE partufo partition (year)
 SELECT sighted, reported, sighting_location, shape, duration,
-description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;`
+description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;```
 
 - Location of the partioned table
 	- `/user/hive/warehouse/partufo/`
@@ -126,3 +126,102 @@ description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;`
 | `DESCRIBE table;`				| `DESCRIBE (FORMATTED|EXTENDED) table;`
 | `CREATE DATABASE db_name;`	| `CREATE DATABASE db_name;`
 | `DROP DATABASE db_name;`		| `DROP DATABASE db_name (CASCADE);`
+
+# Sqoop
+
+**Required packages**
+- mysql-server
+- mysql
+
+**Setup database**
+```
+mysql> create database hadooptest;
+mysql> CREATE USER ' hadoopuser'@'localhost' IDENTIFIED BY 'password';
+mysql> GRANT ALL PRIVILEGES ON *.* TO ' hadoopuser'@'localhost' WITH GRANT OPTION;
+mysql> flush privileges;
+```
+
+**Load data in existing table**
+```
+mysql> load data local infile 'employees.tsv'
+into table employees
+fields terminated by '\t' lines terminated by ' \n';
+```
+
+**Exporting data from MySQL to HDFS**
+```
+sqoop import --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+```
+- `hadoop fs -ls employees`
+- `hadoop fs -cat employees/part-m-00003` 
+
+**Exporting data from MySQL into Hive**
+`hive -e "show tables like 'employees'"` 
+
+```
+sqoop import --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees 
+--hive-import --hive-table employees
+```
+
+**Selective import**
+```
+sqoop import --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password
+--table employees --columns first_name,salary
+--where "salary > 45000"
+--hive-import --hive-table salary
+```
+
+**Import data from Hadoop into MySQL**
+
+1. `hadoop fs -mkdir edata`
+2. `hadoop fs -put newemployees.tsv edata/newemployees.tsv`
+
+```
+sqoop export --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+--export-dir edata --input-fields-terminated-by '\t'
+```
+
+**Importing Hive data into MySQL**
+
+1. Empty your table (`truncate employees`)
+2. `hadoop fs –ls /user/hive/warehouse/employees`
+
+```
+sqoop export --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+--export-dir /user/hive/warehouse/employees
+--input-fields-terminated-by ' \001'
+--input-lines-terminated-by ' \n'
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
