@@ -62,9 +62,9 @@
 `LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;`
 
 **Set right column separator**<br />
-`CREATE TABLE ufodata(sighted string, reported string, sighting_location
-string, shape string, duration string, description string)
-ROW FORMAT DELIMITED
+`CREATE TABLE ufodata(sighted string, reported string, sighting_location<br />
+string, shape string, duration string, description string)<br />
+ROW FORMAT DELIMITED<br />
 FIELDS TERMINATED BY '\t';`
 
 **Create table from existing file**<br />
