@@ -220,9 +220,11 @@ sqoop export --connect jdbc:mysql://localhost/hadooptest
 | ``| 
 
 ## Create / Add data in MongoDB
-- `db.comedy.insert({name:"Ted", year:2012})`
-- `db.comedy.save({name:"Ted", year:2012})`
-	- save does an insert if there is no `_id`key in the object, else it does an update
+```
+db.comedy.insert({name:"Ted", year:2012})
+db.comedy.save({name:"Ted", year:2012})
+	save does an insert if there is no `_id`key in the object, else it does an update
+```
 
 ## Find
 ```
