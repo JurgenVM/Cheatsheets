@@ -62,38 +62,48 @@
 `LOAD DATA INPATH '/tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata;`
 
 **Set right column separator**<br />
-```CREATE TABLE ufodata(sighted string, reported string, sighting_location
+```
+CREATE TABLE ufodata(sighted string, reported string, sighting_location
 string, shape string, duration string, description string)
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '\t';```
+FIELDS TERMINATED BY '\t';
+```
 
 **Create table from existing file**<br />
-```CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
+```
+CREATE EXTERNAL TABLE states(abbreviation string, full_name string)
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY '\t'
-LOCATION '/tmp/states';```
+LOCATION '/tmp/states';
+```
 
 **Exporting query output**<br />
-```INSERT OVERWRITE DIRECTORY '/tmp/out'
+```
+INSERT OVERWRITE DIRECTORY '/tmp/out'
 SELECT t1.sighted, t1.reported, t1.shape, t2.full_name
 FROM ufodata t1 JOIN states t2
-ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sighting_location) -1))));```
+ON (LOWER(t2.abbreviation) = LOWER(substr(t1.sighting_location, (LENGTH(t1.sighting_location) -1))));
+```
 - Output will be in `/tmp/out`
 	- `hadoop fs -ls /tmp/out`
 	- `hadoop fs -cat /tmp/out/000000_1 | head`
 
 **Making partitioned UFO sighting table**<br />
-```CREATE TABLE partufo(sighted string, reported string, sighting_location
+```
+CREATE TABLE partufo(sighted string, reported string, sighting_location
 string,shape string, duration string, description string)
 PARTITIONED BY (year string)
 ROW FORMAT DELIMITED
-FIELDS TERMINATED BY '\t';```
+FIELDS TERMINATED BY '\t';
+```
 
-```SET hive.exec.dynamic.partition=true;
+```
+SET hive.exec.dynamic.partition=true;
 SET hive.exec.dynamic.partition.mode=nonstrict;
 INSERT OVERWRITE TABLE partufo partition (year)
 SELECT sighted, reported, sighting_location, shape, duration,
-description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;```
+description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;
+```
 
 - Location of the partioned table
 	- `/user/hive/warehouse/partufo/`
