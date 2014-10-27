@@ -47,6 +47,7 @@
 5. `/usr/lib/hadoop/lib/commons-logging-1.1.1.jar`
 
 -------------------------------------------------------------------------------------
+
 # Hive
 | Command											| Meaning
 | :---												| :---
@@ -138,6 +139,8 @@ description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata;
 | `CREATE DATABASE db_name;`	| `CREATE DATABASE db_name;`
 | `DROP DATABASE db_name;`		| `DROP DATABASE db_name (CASCADE);`
 
+-------------------------------------------------------------------------------------
+
 # Sqoop
 
 **Required packages**
@@ -209,6 +212,8 @@ sqoop export --connect jdbc:mysql://localhost/hadooptest
 --input-lines-terminated-by '\n'
 ```
 
+-------------------------------------------------------------------------------------
+
 #Mongo
 
 | Command						| Meaning
@@ -272,6 +277,7 @@ text:'The best article ever!'}]})
 	- comments (array)
 		- by
 		- text
+
 ```
 db.articles.find({'meta.author':'Chad Muska' } )
 db.articles.find({'meta.likes':{$gt:10}})
@@ -363,3 +369,87 @@ db.comedy.remove() // empty the collection
 db.comedy.drop() // remove the collection
 db.dropDatabase() // drop current database
 ```
+
+# Example test (from chamilo)
+
+## Mapreduce
+(404 not found)
+
+## Create partitioned table + import data from external file (wrong way but it works)
+```
+CREATE TABLE ufodata(sighted string, reported string, sighting_location
+string, shape string, duration string, description string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t' ;
+
+LOAD DATA INPATH ' /tmp/ufo.tsv' OVERWRITE INTO TABLE ufodata ;
+
+CREATE TABLE partufo(sighted string, reported string, sighting_location
+string,shape string, duration string, description string)
+PARTITIONED BY (year string)
+ROW FORMAT DELIMITED
+FIELDS TERMINATED BY '\t' ;
+
+SET hive.exec.dynamic.partition=true ;
+SET hive.exec.dynamic.partition.mode=nonstrict ;
+INSERT OVERWRITE TABLE partufo partition (year)
+SELECT sighted, reported, sighting_location, shape, duration,
+description, SUBSTR(TRIM(sighted), 1,4) FROM ufodata ;
+```
+
+## Export SELECT statement
+```
+INSERT OVERWRITE DIRECTORY ' /tmp/out' //Next statement will be outputed to this directory 
+
+SELECT t1.sighted, t1.reported, t1.shape, t2.full_name
+FROM ufodata t1 JOIN states t2
+ON (LOWER(t2.abbreviation) = LOWER(substr( t1.sighting_location,
+(LENGTH(t1.sighting_location) -1)))) ;
+```
+
+## import / export MySQL -> HDFS
+**Exporting data from MySQL to HDFS**
+```
+sqoop import --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+
+// output found in hadoop
+	//hadoop fs -cat employees/part-m-00003
+```
+
+**Import data from Hadoop into MySQL**
+
+1. `hadoop fs -mkdir edata`
+2. `hadoop fs -put newemployees.tsv edata/newemployees.tsv`
+
+```
+sqoop export --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+--export-dir edata --input-fields-terminated-by '\t'
+```
+
+## import / export Hive -> MySQL
+**Importing Hive data into MySQL**
+
+1. Empty your table (`truncate employees`)
+2. `hadoop fs –ls /user/hive/warehouse/employees`
+
+```
+sqoop export --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees
+--export-dir /user/hive/warehouse/employees
+--input-fields-terminated-by '\001'
+--input-lines-terminated-by '\n'
+```
+
+**Exporting data from MySQL into Hive**
+`hive -e "show tables like 'employees'"` 
+
+```
+sqoop import --connect jdbc:mysql://localhost/hadooptest
+--username hadoopuser --password password --table employees 
+--hive-import --hive-table employees
+```
+
+## Use info above for MongoDB
+
