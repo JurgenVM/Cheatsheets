@@ -7,6 +7,12 @@
     /bin/tar --strip-components 1 -C /var/www/html/wordpress/ -xf /tmp/wordpress-latest.tar.gz
 ```
 ## Install package
+**Single packages**
+```
+- name: Install common packages
+  yum: pkg=nginx state=installed
+```
+**Multiple packages**
 ```
 - name: Install common packages
   yum: pkg={{item}} state=installed
@@ -15,22 +21,20 @@
 	- php
 	- nginx
 ```
-**OR**
-Install single package and run commands after
-```
-- name: Install MariaDB
-  yum: name=mariadb-server
-  notify:
-    - restart mariadb
-```
-
 ## Firewall
-Enable firewall
+**Enable firewall**
 ```
 - name: Enable firewall
   service: name=firewalld state=running enabled=true
 ```
-
+**Single service**
+```
+- name: Configure firewall
+  firewalld: service=http state=enabled permanent={{ item }}
+  with_items:
+    - [ 'yes' , 'no '] # current session + after reboot
+```
+**Multiple services**
 ```
 - name: Configure firewall
   firewalld: service={{ item[0] }} state=enabled permanent={{ item[1] }}
@@ -38,6 +42,7 @@ Enable firewall
     - [ 'http' , 'https' ]
     - [ 'yes' , 'no '] # current session + after reboot
 ```
+
 
 ## Services
 Start service
@@ -49,12 +54,12 @@ Start service
 ## MySQL
 ```
 - name: Create a new database
-  mysql_db: name={{ dbname }} state=present collation=utf8_general_ci
+  mysql_db: name=dbname state=present collation=utf8_general_ci
 ```
 
 ```
 - name: Create a database user
-  mysql_user: name={{ dbuser }} password={{ dbpasswd }} priv=*.*:ALL host=localhost state=present
+  mysql_user: name=dbuser password=dbpasswd priv=*.*:ALL host=localhost state=present
 ```
 
 ## File actions

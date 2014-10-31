@@ -1,4 +1,3 @@
-
 ## Vagrant Commandos
 
 | Task 					| Command
@@ -18,3 +17,7 @@
 | Task 					| Command
 | :---                  | :---
 | `vb.name = ''`		| set the name of the machine in eq "Virtualbox"
+| `vb.hostname` 		|
+| `vb.box` 				|
+| ` ` 					|
+
