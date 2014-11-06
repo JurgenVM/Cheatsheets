@@ -17,6 +17,8 @@ Configuration InstallScript
 
 # Resource Blocks
 
+[Source](http://technet.microsoft.com/en-us/library/dn249921.aspx)
+
 | Provider																					| Description
 | :-- 																						| :--
 | [DSC Archive Resource](http://technet.microsoft.com/en-us/library/dn249917.aspx) 			| Unpacks archive (.zip) files at specific paths on target nodes.

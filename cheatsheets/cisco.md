@@ -56,6 +56,30 @@ Config mode `conf t`
 | router eigrp <nr>			|
 | network A.B.C.D <netmask>	|
 
+------------------------------------------------------------------------------------------------------------------------
+
+## IPv6
+
+**Configure IPv6 interface**
+- `> conf t`
+- `> ipv6 unicast-routing`
+- `> int giga 0/0`
+- `> ipv6 address 2001:DB8:1:1::1/64`
+- `> ipv6 address FE80::1 link-local`
+
+
+**Configure RIP for IPv6**
+- `> conf t`
+- `> ipv6 router rip CISCO`
+
+**Configure OSPF** 
+- `> conf t`
+- `> ipv6 unicast-routing`
+- `> ipv6 router ospf 10`
+- `> router id 1.1.1.1`
+- `> int giga 0/0`
+	- `> ipv6 ospf 10 area 0`
+
 # Switch
 
 ## Configure Interface
