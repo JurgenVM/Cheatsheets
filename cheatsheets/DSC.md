@@ -44,6 +44,17 @@ WindowsFeature MyRoleExample
 }
 ```
 
+**Services**
+```
+Service virtualDiskService
+{
+	Name = 'vds'
+	State = 'Running'
+	StartupType = 'Automatic'
+	BuiltInAccount = '' # LocalService / LocalSystem / NetworkService
+}
+```
+
 **Copy file**
 ```
 - File is a built-in resource you can use to manage files and directories
@@ -56,6 +67,28 @@ File MyFileExample
  Recurse = $true
  SourcePath = \\dc1\websitefiles # This is a path that has web files
  DestinationPath = "C:\inetpub\wwwroot" # The path where we want to ensure the web files are present
+ Force = $true # overwrite
+}
+```
+
+**Log**
+
+- Log is located `Windows Logs \ Application and Services Log \ Microsoft \ Windows \ Desired State Configuration \ Analytic`
+
+```
+Log loggingInfo
+{
+	Message = " Windows Environment variable set successfully."
+}
+```
+
+**Environment**
+```
+Environment serveRackInfo
+{
+	Ensure = 'Present'
+	Name = "ServerRack"
+	Value = "Rack2 U9"
 }
 ```
 
@@ -63,9 +96,11 @@ File MyFileExample
 ```
 - Group is a built-in resource that you can use to manage local Windows groups
 - This example ensures the existence of a group with the name specified by $MyGroupName
-Group MyGroupExample
+Group testGroup
 {
-    Ensure = "Present" # Checks whether a group by this GroupName already exists and creates it if it does not
-    Name = $MyGroupName
+	Ensure = 'Present'
+	GroupName = 'AmanTestGroup'
+	Members = 'root'
+	Description = "This group is created by PowerShell DCS script"
 }
 ```
