@@ -16,26 +16,27 @@
 | `Measure-command {Get-Process}`	| Shows you the execution time
 
 # Help system
-| Command								| Meaning
-| :---									| :---
-| `Update-Help -Force`					| Update the help
-| `Save-Help`							| Save the help to a local file
-| `man`									| Scrollable
-| `help`								| Alias
-| `Get-Help "*keyword*"` 				| Get help
-| `Get-Help Get-*` 						| Get all commands which start with "Get-"
-| `Get-Help`							| `-ShowWindow`
-| 										| `-Detailed`
-|										| `-Examples`
-| 										| `-Full`
-| 										| `-Online`
-| 										| `-ShowCommand`
-| `Get-Help -Category Provider`			|
-| `Get-verb`							| Get the verbs used in PowerShell
-| `Get-Alias -Definition get-process` 	| Get all aliases for `Get-Process`
-| `Get-Help About_*`					| Get all the about topics
-| `Get-Process | Get-Member`			| Get all the methods, properties,... of the object
-| `Get-Command -Module AD*`				| Get all commands from modules which start with AD
+| Command															| Meaning
+| :---																| :---
+| `Update-Help -Force`												| Update the help
+| `Save-Help`														| Save the help to a local file
+| `man`																| Scrollable
+| `help`															| Alias
+| `Get-Help "*keyword*"` 											| Get help
+| `Get-Help Get-*` 													| Get all commands which start with "Get-"
+| `Get-Help`														| `-ShowWindow`
+| 																	| `-Detailed`
+|																	| `-Examples`
+| 																	| `-Full`
+| 																	| `-Online`
+| 																	| `-ShowCommand`
+| `Get-Help -Category Provider`										|
+| `Get-verb`														| Get the verbs used in PowerShell
+| `Get-Alias -Definition get-process` 								| Get all aliases for `Get-Process`
+| `Get-Help About_*`												| Get all the about topics
+| `Get-Process | Get-Member`										| Get all the methods, properties,... of the object
+| `Get-Command -Module AD*`											| Get all commands from modules which start with AD
+| `Get-Help about* | Out-GridView –PassThru | Get-Help –ShowWindow` | This will display a grid view with all about topics to choose from. Select one, and click OK, to view the help file.
 
 # Export
 
