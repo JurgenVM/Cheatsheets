@@ -74,11 +74,11 @@ File MyFileExample
 **Log**
 
 - Log is located `Windows Logs \ Application and Services Log \ Microsoft \ Windows \ Desired State Configuration \ Analytic`
-
+	- needs to be enabled
 ```
 Log loggingInfo
 {
-	Message = " Windows Environment variable set successfully."
+	Message = "Windows Environment variable set successfully."
 }
 ```
 
