@@ -25,7 +25,10 @@
 ##Samba
 ###Required packages
 
-`libsemanage-python, samba-common, samba, samba-client`
+- `libsemanage-python`
+- `samba-common`
+- `samba`
+- `samba-client`
 
 ###Services & firewall
 
@@ -47,25 +50,29 @@
 
 ```
 # Samba configuration, managed by Ansible. Please don't edit manually
-# Ansible managed: /etc/ansible/roles/samba/templates/smb.conf.j2 modified on 2014-11-07 15:57:44 by
- vagrant on pr011
+# {{ ansible_managed }}
 #
 # vim: ft=samba
 
 [global]
  # Server information
- netbios name = FILESRV
- workgroup = LINUXLAB
- server string = Fileserver %m
+ netbios name = {{ samba_netbios_name }}
+ workgroup = {{ samba_workgroup|default('WORKGROUP') }}
+ server string = {{ samba_server_string|default('Fileserver %m') }}
 
  # Logging
+{% if samba_log is defined %}
+ log file = {{ samba_log }}
+ max log size = {{ samba_log_size|default('5000') }}
+{% else %}
  syslog only = yes
  syslog = 1
+{% endif %}
 
  # Authentication
- security = user
- passdb backend = tdbsam
- map to guest = bad user
+ security = {{ samba_security|default('user') }}
+ passdb backend = {{ samba_passdb_backend|default('tdbsam') }}
+ map to guest = {{ samba_map_to_guest|default('bad user') }}
 
  # Name resolution: make sure \\NETBIOS_NAME\ works
  wins support = yes
@@ -73,46 +80,49 @@
  domain master = yes
  preferred master = yes
 
+{% if samba_load_printers is defined and samba_load_printers == 'no' %}
+ # Don't load printers
+ load printers = no
+ printing = bsd
+ printcap name = /dev/null
+ disable spoolss = yes
+
+{% endif %}
+{% if samba_enable_homes is defined and samba_enable_homes == 'yes' %}
 ## Make home directories accessible
 [homes]
  comment = Home Directories
  browseable = no
  writable = yes
 
-[directie]
-  comment = directie
-  path = /srv/shares//directie
-  public = no
-  valid users = @directie, femkevdv
+{% endif %}
+{% for share in samba_shares %}
+[{{ share.name }}]
+  comment = {{ share.comment|default(share.name) }}
+  path = {{ samba_share_root }}/{{ share.name }}
+  public = {{ share.public|default('no') }}
+{% if share.valid_users is defined %}  valid users = {{ share.valid_users }}
+{% endif %}
+{% if share.write_list is defined %}  write list = {{ share.write_list }}
+{% endif %}
+{% if share.force_group is defined %}  force group = {{ share.force_group }}
+{% endif %}
+{% if share.create_mask is defined %}  create mask = {{ share.create_mask }}
+{% endif %}
+{% if share.create_mode is defined %}  create mode = {{ share.create_mode }}
+{% endif %}
+{% if share.force_create_mode is defined %}  force create mode = {{ share.force_create_mode }}
+{% endif %}
+{% if share.directory_mask is defined %}  directory mask = {{ share.directory_mask }}
+{% endif %}
+{% if share.directory_mode is defined %}  directory mode = {{ share.directory_mode }}
+{% endif %}
+{% if share.force_directory_mode is defined %}  force directory mode = {{ share.force_directory_mode }}
+{% endif %}
 
-[financieringen]
-  comment = financieringen
-  path = /srv/shares//financieringen
-  public = no
+{% endfor %}
 
-[verzekeringen]
-  comment = verzekeringen
-  path = /srv/shares//verzekeringen
-  public = no
 
-[publiek]
-  comment = publiek
-  path = /srv/shares//publiek
-  public = True
-
-[staf]
-  comment = staf
-  path = /srv/shares//staf
-  public = no
-  valid users = @publiek
-  write list = femkevdv
-
-[beheer]
-  comment = beheer
-  path = /srv/shares//beheer
-  public = no
-  valid users = @beheer
-  write list = @beheer
 ```
 
 # Enterprise Linux 7 (RedHat, CentOS)
